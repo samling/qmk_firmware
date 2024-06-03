@@ -13,7 +13,6 @@
 void ui_Screen1_screen_init(void);
 lv_obj_t * ui_Screen1;
 lv_obj_t * ui_currLayer;
-lv_obj_t * ui_currRGB;
 lv_obj_t * ui_Container1;
 lv_obj_t * ui_shiftIndicator;
 lv_obj_t * ui_ctrlIndicator;
@@ -22,6 +21,20 @@ lv_obj_t * ui_altIndicator;
 lv_obj_t * ui_guiIndicator;
 lv_obj_t * ui_Container3;
 lv_obj_t * ui_capswordIndicator;
+
+
+// SCREEN: ui_Screen2
+void ui_Screen2_screen_init(void);
+lv_obj_t * ui_Screen2;
+lv_obj_t * ui_currRgb;
+lv_obj_t * ui_Container4;
+lv_obj_t * ui_hueVal;
+lv_obj_t * ui_satVal;
+lv_obj_t * ui_brtVal;
+lv_obj_t * ui_Container5;
+lv_obj_t * ui_hueLabel;
+lv_obj_t * ui_satLabel;
+lv_obj_t * ui_brtLabel;
 lv_obj_t * ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
@@ -45,6 +58,7 @@ void ui_init(void)
                                                true, LV_FONT_DEFAULT);
     lv_disp_set_theme(dispp, theme);
     ui_Screen1_screen_init();
+    ui_Screen2_screen_init();
     ui____initial_actions0 = lv_obj_create(NULL);
     lv_disp_load_scr(ui_Screen1);
 }
