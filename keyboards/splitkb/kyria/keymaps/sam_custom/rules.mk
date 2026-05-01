@@ -34,3 +34,6 @@ TRI_LAYER_ENABLE = yes
 
 # Space saving
 LTO_ENABLE = yes
+
+# Enable Via
+VIA_ENABLE = yes

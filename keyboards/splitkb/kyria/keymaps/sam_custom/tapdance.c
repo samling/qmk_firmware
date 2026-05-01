@@ -29,6 +29,13 @@ void tap_dance_tap_hold_reset(tap_dance_state_t *state, void *user_data) {
         tap_hold->held = 0;
     }
 }
+void tap_dance_tap_hold_release(tap_dance_state_t *state, void *user_data) {
+    tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)user_data;
+
+    if (state->count && !state->finished) {
+        tap_code16(tap_hold->tap);
+    }
+}
 
 // multi-state
 td_state_t cur_dance(tap_dance_state_t *state) {

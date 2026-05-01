@@ -16,6 +16,9 @@
 
 #pragma once
 
+// Via
+#define DYNAMIC_KEYMAP_LAYER_COUNT 6
+
 // RGB
 
 // #ifdef RGBLIGHT_ENABLE

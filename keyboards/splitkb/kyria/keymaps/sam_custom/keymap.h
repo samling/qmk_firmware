@@ -68,7 +68,7 @@ enum tap_dance_codes {
 };
 
 enum macro_codes {
-    MACRO_UP_DIR = SAFE_RANGE,
+    MACRO_UP_DIR = QK_KB_0,
     MACRO_BRACES_PAIR,
     MACRO_BRACKETS_PAIR,
     MACRO_PARENS_PAIR,

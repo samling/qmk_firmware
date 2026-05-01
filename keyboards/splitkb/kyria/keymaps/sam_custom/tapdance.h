@@ -26,6 +26,7 @@ tap_dance_action_t tap_dance_actions[5];
 
 void tap_dance_tap_hold_finished(tap_dance_state_t *state, void *user_data);
 void tap_dance_tap_hold_reset(tap_dance_state_t *state, void *user_data);
+void tap_dance_tap_hold_release(tap_dance_state_t *state, void *user_data);
 
 td_state_t cur_dance(tap_dance_state_t *state);
 

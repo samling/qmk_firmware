@@ -96,9 +96,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                  │         │         │                  │     │     │     │     │     │     │     │
 //                                  └─────────┴─────────┴──────────────────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
 [_MAGIC] = LAYOUT(
-  DB_TOGG , _______ , _______ , _______ , _______ , RGB_TOG          ,                                         _______ , _______ , _______ , _______ , _______ , _______,
-  _______ , RGB_SPI , RGB_HUI , RGB_SAI , RGB_VAI , RGB_MODE_FORWARD ,                                         _______ , _______ , _______ , _______ , _______ , _______,
-  _______ , RGB_SPD , RGB_HUD , RGB_SAD , RGB_VAD , RGB_MODE_REVERSE , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______,
+  DB_TOGG , _______ , _______ , _______ , _______ , RM_TOGG ,                                         _______ , _______ , _______ , _______ , _______ , _______,
+  _______ , RM_SPDU , RM_HUEU , RM_SATU , RM_VALU , RM_NEXT ,                                         _______ , _______ , _______ , _______ , _______ , _______,
+  _______ , RM_SPDD , RM_HUED , RM_SATD , RM_VALD , RM_PREV , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______ , _______,
                                 _______ , _______ , _______          , _______ , _______ , _______ , _______ , _______ , _______ , _______
 ),
 
@@ -136,22 +136,11 @@ void matrix_init_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    tap_dance_action_t *action;
-
     #ifdef CONSOLE_ENABLE
         uprintf("KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
     #endif
 
     switch (keycode) {
-        // tap-hold macros
-        // case TD(PLAYPAUSE_MUTE):
-        case TD(AUTOTAB):
-            action = &tap_dance_actions[QK_TAP_DANCE_GET_INDEX(keycode)];
-            if (!record->event.pressed && action->state.count && !action->state.finished) {
-                tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)action->user_data;
-                tap_code16(tap_hold->tap);
-            }
-            break;
         case MACRO_UP_DIR:
             if (record->event.pressed) {
                 SEND_STRING("../");
@@ -241,7 +230,7 @@ void housekeeping_task_user(void) {
 }
 
 #define ACTION_TAP_DANCE_TAP_HOLD(tap, hold) \
-    { .fn = {NULL, tap_dance_tap_hold_finished, tap_dance_tap_hold_reset}, .user_data = (void *)&((tap_dance_tap_hold_t){tap, hold, 0}), }
+    { .fn = {NULL, tap_dance_tap_hold_finished, tap_dance_tap_hold_reset, tap_dance_tap_hold_release}, .user_data = (void *)&((tap_dance_tap_hold_t){tap, hold, 0}), }
 
 // update the array size in tapdance.h when adding to or removing from this
 tap_dance_action_t tap_dance_actions[] = {
